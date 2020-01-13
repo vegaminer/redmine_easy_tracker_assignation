@@ -13,7 +13,7 @@
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class CreateTrackerMemberAssociations < ActiveRecord::Migration
+class CreateTrackerMemberAssociations < ActiveRecord::Migration[4.2]
   def change
     create_table :tracker_member_associations do |t|
       t.column :user_id, :integer, null: false

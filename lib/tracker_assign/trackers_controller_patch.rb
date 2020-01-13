@@ -36,8 +36,13 @@ module TrackerAssign
         			destroy_without_plugin_assignation
                 end
 
-                alias_method_chain :destroy, :plugin_assignation
+		def destroy_without_plugin_assignation
+		  destroy	
+		end
 
+                #alias_method_chain :destroy, :plugin_assignation
+                alias_method :destroy_without_plugin_assignation, :destroy_with_plugin_assignation
+		alias_method :destroy_with_plugin_assignation, :destroy_without_plugin_assignation
             end
         end
     end

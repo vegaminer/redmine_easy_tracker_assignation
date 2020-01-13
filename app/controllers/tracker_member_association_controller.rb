@@ -14,8 +14,8 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TrackerMemberAssociationController < ApplicationController
-	before_filter :check_permissions, :only => [:create]
-	before_filter :check_if_member, :only => [:create]
+	before_action :check_permissions, :only => [:create]
+	before_action :check_if_member, :only => [:create]
 
 	#Create a Tracker-Member association
 	#if an association already exist, modify it, or destroy it if member == -1
