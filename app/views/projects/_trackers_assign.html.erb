@@ -13,8 +13,8 @@
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.-->
 
-<% if @project.new_record? || @project.module_enabled?('issue_tracking') %>
-	<% unless @trackers.empty? %>
+<% if !@project.new_record? && @project.module_enabled?('issue_tracking') %>
+	<% unless @project.rolled_up_trackers.empty? %>
 
 		<%  @members = @project.principals.map { |m| [(m.lastname + " " + m.firstname), m.id] }
 			@members.unshift(['',-1]).sort! #add an empty slot
@@ -25,10 +25,11 @@
 			@assigns = @assigns.select{|a| (a[:project_id] == @project[:id].to_i)}
 		end %>
 
-		<hr>
-		<legend style="padding-left: 20px; font-weight: bold; display: inline-block;"><%= l(:label_auto_assign) %> : </legend>
+		<!-- hr -->
+		<!-- legend style="padding-left: 20px; font-weight: bold; display: inline-block;"><%= l(:label_auto_assign) %> : </legend -->
+		<fieldset class="tabular"><legend style="font-weight: bold"><%= l(:label_auto_assign) %></legend>
 		<table style="display: inline-flex;">
-			<% @trackers.each do |tracker| %>
+			<% @project.rolled_up_trackers.each do |tracker| %>
 				<tr>
 				<td><%= tracker %> : </td><td><%= select_tag(:member_select, options_for_select(@members), {:onChange => "javascript: assign(this);", :class => "member_select_"+tracker.id.to_s}) %></td></tr>
 				<% if @assigns != nil %>
@@ -42,6 +43,8 @@
 				<% end %>
 			<% end %>
 		</table>
+		</fieldset>
+		<hr/>
 	<% end %>
 <% end %>
 

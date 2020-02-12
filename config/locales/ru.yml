@@ -1,0 +1,5 @@
+ru:
+  permission_assign_trackers: Управление автоназначенем пользователей в трекерах
+  enumeration_project_roles: Роли в проекте
+  label_roles: Роли в проекте
+  label_auto_assign: Автоматическое назначение задач в трекере
